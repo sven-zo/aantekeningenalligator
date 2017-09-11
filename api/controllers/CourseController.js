@@ -6,6 +6,9 @@
  */
 
 module.exports = {
-	
+  all: (req, res) => {
+    Course.find({}).exec((err, courses) => {
+      return res.view('courseList', { courses });
+    });
+  },
 };
-

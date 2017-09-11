@@ -1,0 +1,10 @@
+extends layout
+include mixins/card
+
+block vars
+  - var title='📓🐊 - Course'
+
+block content
+  .aa-course-list
+    each course in courses
+      +card('Ga naar course')(title=course.code, text=course.name)

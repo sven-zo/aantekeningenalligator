@@ -10,8 +10,14 @@ module.exports = {
   attributes: {
     name: {
       type: 'string',
-      required: true
-    }
-  }
+      required: true,
+      size: 50,
+    },
+    code: {
+      type: 'string',
+      required: true,
+      size: 25,
+    },
+  },
 };
 

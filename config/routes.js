@@ -37,7 +37,8 @@ module.exports.routes = {
   },
   '/credits': {
     view: 'credits'
-  }
+  },
+  'get /courses': 'Course.all',
 
   /***************************************************************************
   *                                                                          *
