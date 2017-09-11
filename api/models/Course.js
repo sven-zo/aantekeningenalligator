@@ -18,6 +18,11 @@ module.exports = {
       required: true,
       size: 25,
     },
+    class: {
+      type: 'string',
+      enum: ['code', 'ontwerp', 'filo', 'unknown'],
+      defaultsTo: 'unknown'
+    },
   },
 };
 

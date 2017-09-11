@@ -5,6 +5,6 @@ block vars
   - var title='📓🐊 - Course'
 
 block content
-  .aa-course-list
+  .aa-course-list-cards
     each course in courses
-      +card('Ga naar course')(title=course.code, text=course.name)
+      +card('Ga naar course')(title=course.name, text=course.code, class=course.class)

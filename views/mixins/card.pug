@@ -1,8 +1,7 @@
 mixin card(...actions)
   .aa-card-wide.mdl-card.mdl-card--border.mdl-shadow--2dp
-    if attributes.title
-      .mdl-card__title
-        h2.mdl-card__text-title= attributes.title
+    .mdl-card__title(class=attributes.class)
+      h2.mdl-card__text-title= attributes.title
     if attributes.text
       .mdl-card__supporting-text= attributes.text
     if actions
