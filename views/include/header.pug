@@ -5,8 +5,6 @@
         a(href='/').aa-logo= __('site.title')
       .mdl-layout-spacer
       nav.mdl-navigation.mdl-layout--large-screen-only
-        a.mdl-navigation__link(href='/') Home
-        a.mdl-navigation__link(href='/courses') Courses
         a.mdl-navigation__link(href='/')= __('menu.home')
         a.mdl-navigation__link(href=sails.getUrlFor('Course.all'))= __('menu.courses')
         //-a.mdl-navigation__link(href='/') menu.home
@@ -14,11 +12,8 @@
         a.mdl-navigation__link(href='') Link
         a.mdl-navigation__link(href='') Link
   .mdl-layout__drawer
-    span.mdl-layout-title 📓🐊
     span.mdl-layout-title= __('site.titleShort')
     nav.mdl-navigation
-      a.mdl-navigation__link(href='/') Home
-      a.mdl-navigation__link(href='/courses') Courses
       a.mdl-navigation__link(href='/')= __('menu.home')
       a.mdl-navigation__link(href=sails.getUrlFor('Course.all'))= __('menu.courses')
       //-a.mdl-navigation__link(href='/') menu.home
@@ -26,5 +21,5 @@
       a.mdl-navigation__link(href='') Link
       a.mdl-navigation__link(href='') Link
   main.mdl-layout__content
-    .page-content.aa-dynamic
+    .page-content.aa-dynamic.aa-bg
       block content
