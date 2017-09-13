@@ -1,4 +1,12 @@
 {
-	"Welcome": "Welcome",
-	"A brand new app.": "A brand new app."
+	"menu.home": "Home",
+	"menu.courses": "Courses",
+	"login.cardTitle": "Log in",
+	"login.email": "Email",
+	"login.password": "Password",
+	"login.actionLogin": "Login",
+	"home.welcome": "Welcome to AantekeningenAlligator",
+	"home.subtitle": "Your #1 place for notes!",
+	"site.title": "📓AantekeningenAlligator🐊",
+	"site.titleShort": "📓🐊"
 }
