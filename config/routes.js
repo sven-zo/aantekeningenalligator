@@ -39,6 +39,20 @@ module.exports.routes = {
     view: 'credits'
   },
   'get /courses': 'Course.all',
+  '/login': {
+    view: 'login'
+  },
+  'get /login': {
+    view: 'login'
+  },
+
+  'post /login': 'AuthController.login',
+
+  '/logout': 'AuthController.logout',
+
+  'get /signup': {
+  view: 'signup'
+  }
 
   /***************************************************************************
   *                                                                          *
