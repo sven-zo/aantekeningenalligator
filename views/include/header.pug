@@ -6,19 +6,15 @@
       .mdl-layout-spacer
       nav.mdl-navigation.mdl-layout--large-screen-only
         a.mdl-navigation__link(href='/')= __('menu.home')
-        a.mdl-navigation__link(href=sails.getUrlFor('Course.all'))= __('menu.courses')
-        //-a.mdl-navigation__link(href='/') menu.home
-        //-a.mdl-navigation__link(href='/courses') menu.courses
-        a.mdl-navigation__link(href='') Link
+        a.mdl-navigation__link(href=sails.getUrlFor('Course.index'))= __('menu.courses')
+        a.mdl-navigation__link(href=sails.getUrlFor('Category.index'))= __('menu.categories')
         a.mdl-navigation__link(href='') Link
   .mdl-layout__drawer
     span.mdl-layout-title= __('site.titleShort')
     nav.mdl-navigation
       a.mdl-navigation__link(href='/')= __('menu.home')
-      a.mdl-navigation__link(href=sails.getUrlFor('Course.all'))= __('menu.courses')
-      //-a.mdl-navigation__link(href='/') menu.home
-      //-a.mdl-navigation__link(href='/courses') menu.courses
-      a.mdl-navigation__link(href='') Link
+      a.mdl-navigation__link(href=sails.getUrlFor('Course.index'))= __('menu.courses')
+      a.mdl-navigation__link(href=sails.getUrlFor('Category.index'))= __('menu.categories')
       a.mdl-navigation__link(href='') Link
   main.mdl-layout__content.aa-dynamic
     .page-content.aa-bg

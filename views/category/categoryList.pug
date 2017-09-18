@@ -1,0 +1,11 @@
+extends ../layout
+include ../mixins/card
+
+block vars
+  - var title='📓🐊 - Category'
+
+block content
+  h1.display-4.aa-title= __('categoryList.title')
+  .aa-course-list-cards
+    each category in categories
+      +card('Ga naar category')(title=category.name, text=category.code, class=category.image)

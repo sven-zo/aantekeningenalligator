@@ -6,9 +6,11 @@
  */
 
 module.exports = {
-  all: (req, res) => {
-    Course.find({}).exec((err, courses) => {
-      return res.view('courseList', { courses });
+  index: (req, res) => {
+    Course.find()
+      .populate('category')
+      .exec((err, courses) => {
+        return res.view('course/courseList', { courses });
     });
   },
 };
