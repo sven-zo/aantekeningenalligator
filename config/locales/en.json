@@ -13,5 +13,8 @@
 	"courseAdd.categorySelect": "Select category:",
 	"courseList.title": "Course list",
 	"categoryList.title": "categoryList.title",
-	"menu.categories": "menu.categories"
+	"menu.categories": "menu.categories",
+	"courseList.cardAction.gotoDetail": "Go to course",
+	"categoryList.cardAction.gotoDetail": "categoryList.cardAction.gotoDetail",
+	"login.name": "login.name"
 }
