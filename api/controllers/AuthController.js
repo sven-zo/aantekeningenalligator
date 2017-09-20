@@ -31,10 +31,10 @@ module.exports = {
               const token = jwt.sign({user: req.body.name}, SECRET, {
                 expiresIn: '1 days'
               });
-              return res.json({
-                success: true,
-                token: token
+              res.cookie('AantekeningenAlligator_e4RYHTNIe3wG5PohI7xq', token, {
+                httpOnly: true
               });
+              return res.view('loginSucces');
             }
         })
       }

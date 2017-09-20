@@ -5,6 +5,9 @@ block vars
   - var title='📓🐊 - Login'
 
 block content
+  unless success
+        h3 Error:
+        p= message
   .aa-login-page
     .mdl-card.aa-card-login.mdl-card--border.mdl-shadow--4dp
       .mdl-card__title
