@@ -1,10 +1,11 @@
 extends ../layout
-include ../mixins/card
 
 block vars
   - var title='📓🐊 - Course'
 
 block content
+  if snackbar
+    +info(__('courseAdd.snackbarMessage'), 'undo', 'undo')
   h1.display-4.aa-title= __('courseList.title')
   .aa-course-list-cards
     each course in courses

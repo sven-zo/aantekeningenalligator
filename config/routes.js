@@ -28,12 +28,10 @@ module.exports.routes = {
     view: 'credits'
   },
   'get /courses': 'Course.index',
-  'get /courses/add': {
-    view: 'courseAdd'
-  },
+  '/course/add': 'Course.add',
   'get /categories': 'Category.index',
-  'get /debug': {
-    view: 'categoryEdit'
+  'get /category/edit': {
+    view: 'category/categoryEdit'
   },
   // SIGNUP
   'get /signup': {

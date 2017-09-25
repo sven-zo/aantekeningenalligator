@@ -6,3 +6,13 @@ block vars
 block content
   h1.display-4.aa-title= __('courseAdd.title')
   h2= __('courseAdd.categorySelect')
+  form(method='post')
+    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.getmdl-select.getmdl-select__fullwidth
+      input#categories.mdl-textfield__input(name='category', type='text', value=categories[0].name, tabindex='-1')
+      label.mdl-textfield__label(for='categories') Category
+      ul.mdl-menu.mdl-menu--bottom-left.mdl-js-menu(for='categories')
+        each category in categories
+          li.mdl-menu__item= category.name
+    +textfield('name', 'name')
+    +textfield('code', 'code')
+    +submit('Add course')

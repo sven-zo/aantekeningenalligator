@@ -7,11 +7,13 @@
 
 module.exports = {
   register: (req, res) => {
-    User.register(req.body.name, req.body.password).then(() => {
-      res.json({message: 'user registered'})
-    }, (err) => {
-      res.err(err);
-    });
+    User.register(req.body.name, req.body.password).then(
+      () => {
+        return res.json({ message: 'user registered' });
+      },
+      err => {
+        return res.serverError(err);
+      }
+    );
   }
-}
-
+};
