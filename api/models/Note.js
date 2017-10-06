@@ -18,6 +18,12 @@ module.exports = {
     },
     fileUrl: {
       type: 'string'
+    },
+    fileFd: {
+      type: 'string'
+    },
+    fileName: {
+      type: 'string'
     }
   }
 };

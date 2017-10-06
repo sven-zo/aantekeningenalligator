@@ -47,5 +47,6 @@ module.exports.routes = {
   },
   'post /login': 'Auth.authenticate',
   // NOTES
-  '/course/:code/note/:note/add': 'Note.add'
+  '/course/:code/note/:note/add': 'Note.add',
+  '/course/:code/note/:note/file/:file': 'Note.view'
 };

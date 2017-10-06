@@ -9,11 +9,10 @@ block content
     thead
       tr
         th.mdl-data-table__cell--non-numeric Name
-        th Period
-        th Year
+        th ~
     tbody
       each note in course.notes
         tr
           td.mdl-data-table__cell--non-numeric= note.name
-          td= note.period
-          td= note.year
+          td
+            a(href=note.fileUrl) Go to note
