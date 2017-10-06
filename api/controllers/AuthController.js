@@ -9,7 +9,6 @@ const SECRET = require('../../config/env/secret');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-
 // https://scotch.io/tutorials/authenticate-a-node-js-api-with-json-web-tokens
 
 module.exports = {
@@ -20,25 +19,29 @@ module.exports = {
       if (err) return res.serverError(err);
 
       if (!user) {
-        return res.view('login', {success: false, message: 'Username or password incorrect'})
+        return res.view('login', {
+          success: false,
+          message: 'Username or password incorrect'
+        });
       } else if (user) {
-
         bcrypt.compare(req.body.password, user.password, (err, result) => {
           if (err) return res.serverError(err);
           if (!result) {
-            return res.view('login', {success: false, message: 'Username or password incorrect'})
-            } else {
-              const token = jwt.sign({user: req.body.name}, SECRET, {
-                expiresIn: '1 days'
-              });
-              res.cookie('AantekeningenAlligator_e4RYHTNIe3wG5PohI7xq', token, {
-                httpOnly: true
-              });
-              return res.view('loginSucces');
-            }
-        })
+            return res.view('auth/login', {
+              success: false,
+              message: 'Username or password incorrect'
+            });
+          } else {
+            const token = jwt.sign({ user: req.body.name }, SECRET, {
+              expiresIn: '1 days'
+            });
+            res.cookie('AantekeningenAlligator_e4RYHTNIe3wG5PohI7xq', token, {
+              httpOnly: true
+            });
+            return res.view('auth/loginSucces');
+          }
+        });
       }
-    })
+    });
   }
 };
-

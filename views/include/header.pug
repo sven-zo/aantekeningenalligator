@@ -8,7 +8,12 @@
         a.mdl-navigation__link(href='/')= __('menu.home')
         a.mdl-navigation__link(href=sails.getUrlFor('Course.index'))= __('menu.courses')
         a.mdl-navigation__link(href=sails.getUrlFor('Category.index'))= __('menu.categories')
-        a.mdl-navigation__link(href='') Link
+        if req.session.username
+          a.mdl-navigation__link(href='#') 💎0
+          a.mdl-navigation__link(href='/user')= req.session.username
+          a.mdl-navigation__link(href='/logout') Log out
+        else
+          a.mdl-navigation__link(href='/login') Log in
   .mdl-layout__drawer
     span.mdl-layout-title= __('site.titleShort')
     nav.mdl-navigation

@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken');
+
 /**
  * HTTP Server Settings
  * (sails.config.http)
@@ -10,7 +12,6 @@
  */
 
 module.exports.http = {
-
   /****************************************************************************
   *                                                                           *
   * Express middleware to use for every Sails request. To add custom          *
@@ -22,8 +23,7 @@ module.exports.http = {
   ****************************************************************************/
 
   middleware: {
-
-  /***************************************************************************
+    /***************************************************************************
   *                                                                          *
   * The order in which middleware should be run for HTTP request. (the Sails *
   * router is invoked by the "router" middleware below.)                     *
@@ -37,6 +37,7 @@ module.exports.http = {
       'myRequestLogger',
       'bodyParser',
       'handleBodyParserError',
+      'syncHeader',
       'compress',
       'methodOverride',
       'poweredBy',
@@ -48,19 +49,25 @@ module.exports.http = {
       '500'
     ],
 
-  /****************************************************************************
+    /****************************************************************************
   *                                                                           *
   * Example custom middleware; logs each request to the console.              *
   *                                                                           *
   ****************************************************************************/
 
-    // myRequestLogger: function (req, res, next) {
-    //     console.log("Requested :: ", req.method, req.url);
-    //     return next();
-    // }
+    // Maak hier een service van
+    syncHeader: function(req, res, next) {
+      if (req.cookies.AantekeningenAlligator_e4RYHTNIe3wG5PohI7xq) {
+        req.session.username = jwt.decode(
+          req.cookies.AantekeningenAlligator_e4RYHTNIe3wG5PohI7xq
+        ).user;
+      } else {
+        req.session.username = false;
+      }
+      return next();
+    }
 
-
-  /***************************************************************************
+    /***************************************************************************
   *                                                                          *
   * The body parser that will handle incoming multipart HTTP requests. By    *
   * default as of v0.10, Sails uses                                          *
@@ -76,8 +83,7 @@ module.exports.http = {
   ***************************************************************************/
 
     // bodyParser: require('skipper')({strict: true})
-
-  },
+  }
 
   /***************************************************************************
   *                                                                          *

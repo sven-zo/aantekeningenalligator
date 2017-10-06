@@ -27,20 +27,25 @@ module.exports.routes = {
   '/credits': {
     view: 'credits'
   },
+  // COURSES
   'get /courses': 'Course.index',
   '/course/add': 'Course.add',
+  '/course/:code': 'Course.detail',
+  // CATEGORIES
   'get /categories': 'Category.index',
   'get /category/edit': {
     view: 'category/categoryEdit'
   },
   // SIGNUP
   'get /signup': {
-    view: 'signup'
+    view: 'auth/register'
   },
   'post /signup': 'User.register',
   // LOGIN
   'get /login': {
-    view: 'login'
+    view: 'auth/login'
   },
-  'post /login': 'Auth.authenticate'
+  'post /login': 'Auth.authenticate',
+  // NOTES
+  '/course/:code/note/:note/add': 'Note.add'
 };
