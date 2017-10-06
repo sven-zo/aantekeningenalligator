@@ -1,0 +1,19 @@
+extends ../layout
+
+block vars
+  - var title='📓🐊 - Course'
+
+block content
+  h1.display-4.aa-title= course.name
+  table.mdl-data-table.mdl-js-data-table
+    thead
+      tr
+        th.mdl-data-table__cell--non-numeric Name
+        th Period
+        th Year
+    tbody
+      each note in course.notes
+        tr
+          td.mdl-data-table__cell--non-numeric= note.name
+          td= note.period
+          td= note.year

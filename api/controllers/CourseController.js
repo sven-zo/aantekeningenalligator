@@ -6,13 +6,6 @@
  */
 
 module.exports = {
-  // index: (req, res) => {
-  //   Course.find()
-  //     .populate('category')
-  //     .exec((err, courses) => {
-  //       return res.view('course/courseList', { courses });
-  //     });
-  // },
   index: async function(req, res) {
     try {
       const courses = await Course.find().populate('category');
@@ -27,6 +20,7 @@ module.exports = {
     }
   },
   add: async function(req, res) {
+    // TODO: split these in the route
     if (req.method === 'POST') {
       try {
         const category = await Category.findOne({
@@ -51,5 +45,15 @@ module.exports = {
       }
     }
   },
-  create: async function(req, res) {}
+  detail: async function(req, res) {
+    try {
+      const course = await Course.findOne({
+        code: req.params.code
+      }).populate('notes');
+      //return res.json({course})
+      return res.view('course/courseDetail', { course });
+    } catch (err) {
+      return res.serverError(err);
+    }
+  }
 };

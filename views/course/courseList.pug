@@ -7,6 +7,28 @@ block content
   if snackbar
     +info(__('courseAdd.snackbarMessage'), 'undo', 'undo')
   h1.display-4.aa-title= __('courseList.title')
+  .mdl-card.mdl-shadow--4dp
+    .mdl-textfield.mdl-js-textfield.mdl-textfield--expandable
+      .aa-search-bar
+        .mdl-card__supporting-text
+          .aa-search
+            label.mdl-button.mdl-js-button.mdl-button--icon(for='course-search')
+              i.material-icons search
+            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+              input#course-search.mdl-textfield__input(type='text')
+              label.mdl-textfield__label(for='course-search') Search
+        .mdl-card__supporting-text
+          .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.getmdl-select.getmdl-select__fix-height
+            input#year.mdl-textfield__input(type='text', value='valueyear', readonly, tabindex='-1')
+            label(for='year')
+              i.mdl-icon-toggle__label.material-icons keyboard_arrow_down
+            label.mdl-textfield__label(for='year') Year
+            ul.mdl-menu.mdl-menu--bottom-left.mdl-js-menu(for='year')
+              li.mdl-menu__item(data-val='1') One
+              li.mdl-menu__item(data-val='2') Two
+              li.mdl-menu__item(data-val='3') Three
+        button.mdl-button.mdl-js-button.mdl-button--fab.mdl-js-ripple-effect.mdl-button--colored
+          i.material-icons add
   .aa-course-list-cards
     each course in courses
-      +card(__('courseList.cardAction.gotoDetail'))(href='#',title=course.name, text=course.code, class=course.category.image)
+      +card(__('courseList.cardAction.gotoDetail'))(href=`/course/${course.code}`,title=course.name, text=course.code, class=course.category.image)

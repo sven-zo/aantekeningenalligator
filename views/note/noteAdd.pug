@@ -1,0 +1,12 @@
+extends ../layout
+
+block vars
+  - var title='📓🐊 - Add Note'
+
+block content
+  h1.display-4.aa-title= __('noteAdd.title')
+  form(method='post', enctype="multipart/form-data")
+    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.getmdl-select.getmdl-select__fullwidth
+    +textfield('name', 'name')
+    input(type='file', name='note')
+    +submit('Add note')

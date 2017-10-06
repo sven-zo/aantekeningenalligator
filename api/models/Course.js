@@ -20,6 +20,20 @@ module.exports = {
     },
     category: {
       model: 'category'
+    },
+    notes: {
+      collection: 'note',
+      via: 'course',
+    },
+    period: {
+      type: 'int',
+      required: true,
+      size: 1,
+    },
+    year: {
+      type: 'int',
+      required: true,
+      size: 4,
     }
   },
 };
