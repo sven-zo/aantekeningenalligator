@@ -9,39 +9,26 @@ const SECRET = require('../../config/env/secret');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-// https://scotch.io/tutorials/authenticate-a-node-js-api-with-json-web-tokens
-
 module.exports = {
-  authenticate: (req, res) => {
-    User.findOne({
-      name: req.body.name
-    }).exec((err, user) => {
-      if (err) return res.serverError(err);
-
-      if (!user) {
-        return res.view('login', {
-          success: false,
-          message: 'Username or password incorrect'
-        });
-      } else if (user) {
-        bcrypt.compare(req.body.password, user.password, (err, result) => {
-          if (err) return res.serverError(err);
-          if (!result) {
-            return res.view('auth/login', {
-              success: false,
-              message: 'Username or password incorrect'
-            });
-          } else {
-            const token = jwt.sign({ user: req.body.name }, SECRET, {
-              expiresIn: '1 days'
-            });
-            res.cookie('AantekeningenAlligator_e4RYHTNIe3wG5PohI7xq', token, {
-              httpOnly: true
-            });
-            return res.view('auth/loginSucces');
-          }
-        });
+  authenticate: async function (req, res) {
+    const errorView = () => res.view('auth/login', {success: false, message: 'Username or password incorrect'});
+    try {
+      const username = req.body.name;
+      const password = req.body.password;
+      const user = await User.findOne({name: username});
+      if (!user) return errorView();
+      else {
+        const dbpassword = user.password;
+        const result = await bcrypt.compare(password, dbpassword);
+        if (!result) return errorView();
+        else {
+          const token = jwt.sign({user: username}, SECRET, {expiresIn: '1 days'});
+          res.cookie('AantekeningenAlligator_e4RYHTNIe3wG5PohI7xq', token, {httpOnly: true});
+          return res.view('auth/loginSucces');
+        }
       }
-    });
+    } catch (err) {
+      return res.negotiate(err);
+    }
   }
 };
