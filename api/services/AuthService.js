@@ -1,9 +1,10 @@
 const SECRET = require('../../config/env/secret');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 module.exports = {
   verifyToken: function (options) {
-    const cookie = options.req.cookies.AantekeningenAlligator_e4RYHTNIe3wG5PohI7xq;
+    const cookie = options.cookie;
     return new Promise((resolve, reject) => {
       jwt.verify(cookie, SECRET, (err, decoded) => {
         if (err) {
@@ -48,34 +49,34 @@ module.exports = {
     });
   },
   checkPasswordOfUser: function (options) {
-    const req = options.req;
-    const username = req.body.name;
-    const password = req.body.password;
+    const username = options.username;
+    const password = options.password;
     return new Promise( async (resolve, reject) => {
       try {
         const user = await User.findOne({name: username});
-        if (!user) reject({success: false, server: false});
+        if (!user) reject({success: false, server: false, errCode: 1});
         else {
-          const result = await bcrpy.compare(password, user.password);
-          if (!result) reject({success: false, server: false});
+          const result = await bcrypt.compare(password, user.password);
+          if (!result) reject({success: false, server: false, errCode: 2});
           else {
             resolve({success: true, server: false});
           }
         }
       } catch (err) {
-        reject({success: false, server: err});
+        sails.log.error(new Error(err));
+        reject({success: false, server: true, errCode: 3});
       }
     });
   },
   signToken: function (options) {
-    const req = options.req;
-    const username = req.body.name;
+    const username = options.username;
     return new Promise( async (resolve, reject) => {
       try {
         const token = await jwt.sign({user: username}, SECRET, {expiresIn: '1 days'});
         resolve({success: true, server: false, token});
       } catch (err) {
-        reject({success: false, server: err});
+        sails.log.error(new Error(err));
+        reject({success: false, server: true, errCode: 4});
       }
     });
   }
