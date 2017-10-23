@@ -21,10 +21,10 @@ module.exports = {
           try {
             if (err) return res.negotiate(err);
             if (uploadedFiles.length === 0) return res.badRequest('No file was uploaded');
-            const uuid = uuidv5(uploadedFiles[0].fd, NAMESPACE);
-            const uri = util.format('/course/%s/note/%s/file/%s', sails.config.appUrl, req.params.code, req.params.note, uuid);
-            const course = await Course.findOne({code: req.params.code})
             const name = req.body.name;
+            const uuid = uuidv5(uploadedFiles[0].fd, NAMESPACE);
+            const uri = util.format('/course/%s/note/%s/file/%s', req.params.code, name, uuid);
+            const course = await Course.findOne({code: req.params.code})
             console.log(uploadedFiles);
             await Note.create({
               name: name,
@@ -45,9 +45,8 @@ module.exports = {
   view: async function(req, res) {
     try {
       const note = await Note.findOne({fileUrl: `/course/${req.params.code}/note/${req.params.note}/file/${req.params.file}`});
-      console.log(`/course/${req.params.course}/note/${req.params.code}/file/${req.params.file}`);
       if (!note) return res.notFound();
-      res.set("Content-disposition", "attachment; filename='" + note.fileName + "'");
+      res.set("Content-disposition", `attachment; filename='${note.fileName}'`);
       const fileAdapter = SkipperDisk();
       fileAdapter.read(note.fileFd)
       .on('error', function (err){
@@ -55,6 +54,14 @@ module.exports = {
       })
       .pipe(res);
     } catch (err) {
+      return res.negotiate(err);
+    }
+  },
+  delete: async function(req, res) {
+    try {
+      await Note.destroy({ name: req.params.name });
+      return res.json({placeholder: 'Deleted note!'});
+    } catch(err) {
       return res.negotiate(err);
     }
   }
