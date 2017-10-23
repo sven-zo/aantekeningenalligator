@@ -18,7 +18,15 @@ module.exports = {
       });
       res.cookie('AantekeningenAlligator_e4RYHTNIe3wG5PohI7xq', token.token, {httpOnly: true});
       req.session.authenticated = true;
-      return res.view('auth/loginSucces');
+      // Set redirect cookie if redirect is present
+      sails.log('Redirect status: \n session = %s \n flag = %s', req.session.redirect);
+      req.cookies.AantekeningenAlligator_redirect = req.session.redirect;
+      // Set role of user
+      const user = await User.findOne({name: username});
+      req.session.role = user.role;
+      sails.log('Role set: \n role = %s', req.session.role);
+      // Send to succes page
+      return res.view('auth/loginSucces', {redirect: req.session.redirect});
     } catch (err) {
       sails.log.error(new Error(err));
       if (err.server) {
@@ -27,5 +35,13 @@ module.exports = {
         return res.view('auth/login', {success: false, message: 'Username or password incorrect'});
       }
     }
+  },
+  logout: function (req, res) {
+    // Remove token
+    res.cookie('AantekeningenAlligator_e4RYHTNIe3wG5PohI7xq', '', {httpOnly: true});
+    // Remove authenticated status
+    req.session.authenticated = false;
+    // TODO: show pretty page
+    return res.send('You are logged out');
   }
 };
