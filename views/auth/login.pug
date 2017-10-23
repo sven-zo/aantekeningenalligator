@@ -14,10 +14,16 @@ block content
       form(method='post', action=('/login'))
         .mdl-card__supporting-text
           .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-            input.mdl-textfield__input(type='string', id='name', name='name')
+            if prefill
+              input.mdl-textfield__input(type='string', id='name', name='name' value=prefill)
+            else
+              input.mdl-textfield__input(type='string', id='name', name='name' autofocus='autofocus')
             label.mdl-textfield__label(for='name')= __('login.name')
           .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-            input.mdl-textfield__input(type='password', id='password', name='password')
+            if prefill
+              input.mdl-textfield__input(type='password', id='password', name='password' autofocus='autofocus')
+            else
+              input.mdl-textfield__input(type='password', id='password', name='password')
             label.mdl-textfield__label(for='password')= __('login.password')
         .mdl-card__actions.mdl-card--border
             input(type='submit', value=__('login.actionLogin')).mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect
