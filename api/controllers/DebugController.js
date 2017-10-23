@@ -19,5 +19,14 @@ module.exports = {
     } catch (err) {
       return res.send(err);
     }
+  },
+  adminRole: function(req, res) {
+    return res.send('This is a controller action only admins can access.');
+  },
+  modRole: function(req, res) {
+    return res.send('This is a controller action only moderators or admins can access.');
+  },
+  userRole: function(req, res) {
+    return res.send('This is a controller action only logged in users can access.');
   }
 }
