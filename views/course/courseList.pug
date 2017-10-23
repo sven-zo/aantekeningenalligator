@@ -27,8 +27,9 @@ block content
               li.mdl-menu__item(data-val='1') One
               li.mdl-menu__item(data-val='2') Two
               li.mdl-menu__item(data-val='3') Three
-        button.mdl-button.mdl-js-button.mdl-button--fab.mdl-js-ripple-effect.mdl-button--colored
-          i.material-icons add
+        form.aa-formlink(action='course/add')
+          button(type='submit').mdl-button.mdl-js-button.mdl-button--fab.mdl-js-ripple-effect.mdl-button--colored
+            i.material-icons add
   .aa-course-list-cards
     each course in courses
       +card(__('courseList.cardAction.gotoDetail'))(href=`/course/${course.code}`,title=course.name, text=course.code, class=course.category.image)
