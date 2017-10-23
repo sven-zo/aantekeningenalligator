@@ -5,4 +5,8 @@ block vars
   - var title='📓🐊 - Succes!'
 
 block content
-  h1.aa-title Login succesvol!
+  if redirect
+    h1.aa-title Redirecting...
+    meta(http-equiv='refresh', content=`1; url=${redirect}`)
+  else
+    h1.aa-title Login succesvol!
