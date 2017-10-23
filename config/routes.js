@@ -31,11 +31,13 @@ module.exports.routes = {
   'get /courses': 'Course.index',
   '/course/add': 'Course.add',
   '/course/:code': 'Course.detail',
+  '/course/edit/:code': 'Course.edit',
+  '/course/delete/:code': 'Course.delete',
   // CATEGORIES
-  'get /categories': 'Category.index',
-  'get /category/edit': {
-    view: 'category/categoryEdit'
-  },
+  '/categories': 'Category.index',
+  'get /category/edit/:category': 'Category.edit',
+  '/category/add': 'Category.add',
+  '/category/delete/:category': 'Category.delete',
   // SIGNUP
   'get /signup': {
     view: 'auth/register'
@@ -47,6 +49,20 @@ module.exports.routes = {
   },
   'post /login': 'Auth.authenticate',
   // NOTES
-  '/course/:code/note/:note/add': 'Note.add',
-  '/course/:code/note/:note/file/:file': 'Note.view'
+  '/course/:code/note/add': 'Note.add',
+  '/course/:code/note/:note/file/:file': 'Note.view',
+  '/course/:code/note/:note/delete': 'Note.delete',
+  '/course/:code/note/:note/edit': 'Note.edit',
+  // DEBUG
+  '/debug/login': 'Debug.login',
+  '/debug/token': 'Debug.token',
+  '/debug/admin': 'Debug.adminRole',
+  '/debug/mod': 'Debug.modRole',
+  '/debug/user': 'Debug.userRole',
+  // LOGOUT
+  '/logout': 'Auth.logout',
+  // USER MOD OR ADMIN ACTIONS
+  '/user/:user/setrole/:role': 'User.setRole',
+  '/user/:user/delete': 'User.delete',
+  '/user/:user/edit': 'User.edit'
 };
