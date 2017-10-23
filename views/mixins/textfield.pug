@@ -1,4 +1,4 @@
-mixin textfield(name, text)
+mixin textfield(name, text, value)
   .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-    input.mdl-textfield__input(type='string', id=name, name=name)
+    input.mdl-textfield__input(type='text', id=name, name=name, value=value)
     label.mdl-textfield__label(for=name)= text
