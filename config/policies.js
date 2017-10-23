@@ -27,7 +27,14 @@ module.exports.policies = {
   ***************************************************************************/
 
   '*': true,
-  CourseController : 'jwtAuth'
+  CourseController: {
+    add: 'role/user'
+  },
+  DebugController: {
+    adminRole: 'role/admin',
+    modRole: 'role/mod',
+    userRole: 'role/user'
+  }
 
   /***************************************************************************
   *                                                                          *
