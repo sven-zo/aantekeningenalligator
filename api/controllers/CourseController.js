@@ -51,7 +51,8 @@ module.exports = {
       const course = await Course.findOne({
         code: req.params.code
       }).populate('notes');
-      return res.view('course/courseDetail', { course });
+      const editUrl = `/course/edit/${course.code}`;
+      return res.view('course/courseDetail', { course, editUrl });
     } catch (err) {
       return res.serverError(err);
     }
@@ -73,11 +74,12 @@ module.exports = {
       return res.json({placeholder: 'Updated course!'});
     } else {
       try {
+        const categories = await Category.find();
         const course = await Course.findOne({
           code: req.params.code
         });
         //TODO: make this page
-        return res.view('course/courseEdit', { course });
+        return res.view('course/courseEdit', { course, categories });
       } catch (err) {
         return res.negotiate(err);
       }

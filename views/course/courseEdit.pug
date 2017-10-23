@@ -1,10 +1,10 @@
 extends ../layout
 
 block vars
-  - var title='📓🐊 - Add Course'
+  - var title='📓🐊 - Edit Course'
 
 block content
-  h1.display-4.aa-title= __('courseAdd.title')
+  h1.display-4.aa-title= __('courseEdit.title')
   h2= __('courseAdd.categorySelect')
   form(method='post')
     .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.getmdl-select.getmdl-select__fullwidth
@@ -13,8 +13,8 @@ block content
       ul.mdl-menu.mdl-menu--bottom-left.mdl-js-menu(for='categories')
         each category in categories
           li.mdl-menu__item= category.name
-    +textfield('name', 'name')
-    +textfield('code', 'code')
-    +numberfield('year', 'year')
-    +numberfield('period', 'period')
-    +submit('Add course')
+    +textfield('name', 'name', course.name)
+    +textfield('code', 'code', course.code)
+    +numberfield('year', 'year', course.year)
+    +numberfield('period', 'period', course.period)
+    +submit('Save')
