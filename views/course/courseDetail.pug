@@ -6,14 +6,17 @@ block vars
 block content
   a(href=editUrl) Edit
   h1.display-4.aa-title= course.name
+  a(href=addUrl) Add a note
   table.mdl-data-table.mdl-js-data-table
     thead
       tr
         th.mdl-data-table__cell--non-numeric Name
-        th ~
+        th --------------
+        th Description
     tbody
       each note in course.notes
         tr
           td.mdl-data-table__cell--non-numeric= note.name
           td
-            a(href=note.fileUrl) Go to note
+            a(href=note.fileUrl) Download
+          td.mdl-data-tabke__cell--non-numeric= note.description
