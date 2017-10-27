@@ -15,7 +15,9 @@ module.exports = {
         snackbar = req.session.snackbar;
         req.session.snackbar = false;
       }
-      return res.view('course/courseList', { courses, snackbar });
+      const years = FilterService.filterYears({courses});
+      const periods = ['debug1', 'debug2', 'debug3'];
+      return res.view('course/courseList', { courses, snackbar, years, periods });
     } catch (err) {
       return res.serverError(err);
     }
@@ -52,7 +54,8 @@ module.exports = {
         code: req.params.code
       }).populate('notes');
       const editUrl = `/course/edit/${course.code}`;
-      return res.view('course/courseDetail', { course, editUrl });
+      const addUrl = `/course/${course.code}/note/add`;
+      return res.view('course/courseDetail', { course, editUrl, addUrl });
     } catch (err) {
       return res.serverError(err);
     }
