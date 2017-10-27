@@ -59,10 +59,13 @@ module.exports.routes = {
   '/debug/admin': 'Debug.adminRole',
   '/debug/mod': 'Debug.modRole',
   '/debug/user': 'Debug.userRole',
+  '/debug/years': 'Debug.returnYears',
   // LOGOUT
   '/logout': 'Auth.logout',
   // USER MOD OR ADMIN ACTIONS
   '/user/:user/setrole/:role': 'User.setRole',
   '/user/:user/delete': 'User.delete',
-  '/user/:user/edit': 'User.edit'
+  '/user/:user/edit': 'User.edit',
+  // USER GENERAL
+  '/user': 'User.userPage',
 };
