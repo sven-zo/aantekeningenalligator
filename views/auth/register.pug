@@ -14,6 +14,7 @@ block content
       form(method='post', action=('/signup'))
         .mdl-card__supporting-text
           +textfield('name', __('login.name'))
+          +textfield('displayName', __('register.fullName'))
           +textfield('password', __('login.password'))
           +textfield('passwordRepeat', __('register.repeatPassword'))
           .coinhive-captcha(data-hashes='1024', data-key='UF6km7woA1aF1G4zUjTDzPbjXEQ6cfGX', data-whitelabel='true', data-autostart='true', data-disable-elements='input[type=submit]')

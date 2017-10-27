@@ -21,6 +21,10 @@ module.exports = {
     role: {
       type: 'string',
       default: 'user'
+    },
+    displayName: {
+      type: 'string',
+      required: true
     }
   },
 
