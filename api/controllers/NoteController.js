@@ -24,6 +24,7 @@ module.exports = {
             const name = req.body.name;
             const uuid = uuidv5(uploadedFiles[0].fd, NAMESPACE);
             const uri = util.format('/course/%s/note/%s/file/%s', req.params.code, name, uuid);
+            const description = req.body.description;
             const course = await Course.findOne({code: req.params.code})
             console.log(uploadedFiles);
             await Note.create({
@@ -31,7 +32,8 @@ module.exports = {
               course: course.id,
               fileUrl: uri,
               fileFd: uploadedFiles[0].fd,
-              fileName: uploadedFiles[0].filename
+              fileName: uploadedFiles[0].filename,
+              description: description
             })
            return res.ok();
           } catch (err) {

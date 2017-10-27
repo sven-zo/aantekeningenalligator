@@ -24,6 +24,9 @@ module.exports = {
     },
     fileName: {
       type: 'string'
+    },
+    description: {
+      type: 'string'
     }
   }
 };
