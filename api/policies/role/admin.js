@@ -15,20 +15,6 @@ module.exports = async function(req, res, next) {
     return res.view('auth/login', err);
   }
   // Verify moderator role
-  // try {
-  //   const role = await AuthService.checkRole({req, role: 'admin'});
-  // } catch (err) {
-  //   return res.forbidden(err);
-  // }
-  // let roleSuccess = true;
-  // if (! req.session.role) {
-  //   roleSuccess = false;
-  //   return res.negotiate();
-  //   if (! req.session.role === 'admin') {
-  //     roleSuccess = false;
-  //     return res.forbidden();
-  //   }
-  // }
   let roleSuccess;
   if (! req.session.role) {
     roleSuccess = false;
