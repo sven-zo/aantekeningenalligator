@@ -10,49 +10,19 @@ block content
   form.aa-formlink(action='course/add')
           button(type='submit').mdl-button.mdl-js-button.mdl-button--fab.mdl-js-ripple-effect.mdl-button--colored
             i.material-icons add
-  //- .aa-search-card.mdl-card.mdl-shadow--4dp
-  //-   .mdl-textfield.mdl-js-textfield.mdl-textfield--expandable
-  //-     form.aa-search-bar(action='search', method='get')
-  //-       .mdl-card__supporting-text
-  //-         .aa-search
-  //-           label.mdl-button.mdl-js-button.mdl-button--icon(for='course-search')
-  //-             i.material-icons search
-  //-           .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-  //-             input#course-search.mdl-textfield__input(type='text')
-  //-             label.mdl-textfield__label(for='course-search') Search
-  //-       .mdl-card__supporting-text
-  //-         .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.getmdl-select.getmdl-select__fix-height
-  //-           input#year.mdl-textfield__input(type='text', value='valueyear', readonly, tabindex='-1')
-  //-           label(for='year')
-  //-             i.mdl-icon-toggle__label.material-icons keyboard_arrow_down
-  //-           label.mdl-textfield__label(for='year') Year
-  //-           ul.mdl-menu.mdl-menu--bottom-left.mdl-js-menu(for='year')
-  //-             li.mdl-menu__item(data-val='1') One
-  //-             li.mdl-menu__item(data-val='2') Two
-  //-             li.mdl-menu__item(data-val='3') Three
-  //-         button(type='submit').mdl-button.mdl-js-button.mdl-button--fab.mdl-js-ripple-effect.mdl-button--colored
-  //-           i.material-icons search
   form(action='search', method='get')
     input(type='hidden' name='_csrf' value=_csrf)
     +textfield('query', 'query')
+    span year
     select(name='year')
       option all
       each year in years
         option= year
+    span period
     select(name='period')
       option all
       each period in periods
         option= period
-    //- .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.getmdl-select.getmdl-select__fix-height
-    //-   input#year.mdl-textfield__input(type='text', value='valueyear', readonly, tabindex='-1')
-    //-   label.mdl-textfield__label(for='year') Year
-    //-   ul.mdl-menu.mdl-menu--bottom-left.mdl-js-menu(for='year')
-    //-     each year in years
-    //-       li.mdl-menu__item(data-val=year)= year
-      //- label.mdl-textfield__label(for='period') Period
-      //- ul.mdl-menu.mdl-menu--bottom-left.mdl-js-menu(for='period')
-      //-   each period in periods
-      //-     li.mdl-menu__item(data-val=period)= period
     +submit('Search')
   if search
     h2 Search results

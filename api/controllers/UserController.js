@@ -28,6 +28,7 @@ module.exports = {
   userPage: async function(req, res) {
     if (req.method === 'POST') {
       try {
+        sails.log('Updating user display name...');
         await User.update({ name: req.session.username }, {
           displayName: req.body.displayName
         });
@@ -37,6 +38,7 @@ module.exports = {
           const validation = "Alle velden zijn verplicht.";
           return res.view('user/userPage', { validation });
         }
+        return res.negotiate(err);
       }
     } else {
       try {

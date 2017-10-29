@@ -55,7 +55,7 @@ module.exports = {
       } catch (err) {
         if (err.code === 'E_VALIDATION') {
           const validationMsg = "Alle velden zijn verplicht";
-          return res.view('category/categoryEdit', {validationMsg})
+          return res.view('category/categoryAdd', {validationMsg})
         }
         return res.negotiate(err);
       }

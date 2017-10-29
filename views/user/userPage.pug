@@ -4,10 +4,11 @@ block vars
   - var title='📓🐊 - User'
 
 block content
-  h1 User page
+  h1= `User page van ${user.name}`
   if validation
     p= validation
   p Zet je display name (niet zelfde als login name)
   form(method='post')
+    input(type='hidden' name='_csrf' value=_csrf)
     +textfield('displayName', 'displayName', user.displayName)
     +submit('Save')
