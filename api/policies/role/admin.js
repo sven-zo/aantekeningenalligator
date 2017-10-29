@@ -1,9 +1,3 @@
-// const SECRET = require('../../config/env/secret');
-// const jwt = require('jsonwebtoken');
-
-// TODO: Also check for session (because only JWT isn't the way to go?)
-// TODO: put this in a service and make policies per role so that it can be used in the policies file
-
 module.exports = async function(req, res, next) {
   // Verify JSON web token
   let token;

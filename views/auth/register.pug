@@ -5,21 +5,17 @@ block vars
   - var title='📓🐊 - Register'
 
 block content
-  unless success
-    +info(message, '', '')
+  if validationMsg
+    +info(validationMsg, '', '')
   .aa-login-page
     .mdl-card.aa-card-login.mdl-card--border.mdl-shadow--4dp
       .mdl-card__title
         h2.mdl-card__title-text= __('register.cardTitle')
       form(method='post', action=('/signup'))
+        input(type='hidden' name='_csrf' value=_csrf)
         .mdl-card__supporting-text
           +textfield('name', __('login.name'))
           +textfield('displayName', __('register.fullName'))
           +textfield('password', __('login.password'))
           +textfield('passwordRepeat', __('register.repeatPassword'))
-          .coinhive-captcha(data-hashes='1024', data-key='UF6km7woA1aF1G4zUjTDzPbjXEQ6cfGX', data-whitelabel='true', data-autostart='true', data-disable-elements='input[type=submit]')
-            em Loading captcha...
-            br
-            em If it doesn't load, please disable AdBlock!
           input(type='submit', value=__('register.actionRegister')).mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect
-  script(src='https://coinhive.com/lib/captcha.min.js' async)

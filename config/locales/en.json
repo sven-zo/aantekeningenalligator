@@ -15,12 +15,16 @@
 	"categoryList.title": "Category list",
 	"menu.categories": "Categories",
 	"courseList.cardAction.gotoDetail": "Go to course",
-	"categoryList.cardAction.gotoDetail": "Go to category",
+	"categoryList.cardAction.gotoDetail": "Edit category",
 	"login.name": "Name",
 	"courseAdd.snackbarMessage": "Course added",
-	"courseDetail.title": "courseDetail.title",
-	"register.cardTitle": "register.cardTitle",
-	"register.repeatPassword": "register.repeatPassword",
-	"register.actionRegister": "register.actionRegister",
-	"noteAdd.title": "noteAdd.title"
+	"courseDetail.title": "Course detail",
+	"register.cardTitle": "Sign up",
+	"register.repeatPassword": "Repeat password",
+	"register.actionRegister": "Sign up!",
+	"noteAdd.title": "Add a note",
+	"courseEdit.title": "Edit course",
+	"register.fullName": "Full name",
+	"categoryEdit.title": "categoryEdit.title",
+	"categoryAdd.title": "categoryAdd.title"
 }

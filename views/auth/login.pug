@@ -12,6 +12,7 @@ block content
       .mdl-card__title
         h2.mdl-card__title-text= __('login.cardTitle')
       form(method='post', action=('/login'))
+        input(type='hidden' name='_csrf' value=_csrf)
         .mdl-card__supporting-text
           .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
             if prefill

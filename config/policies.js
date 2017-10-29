@@ -26,14 +26,42 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  '*': true,
+  '*': false,
   CourseController: {
-    add: 'role/user'
+    index: true,
+    detail: true,
+    edit: 'role/mod',
+    add: 'role/mod',
+    delete: 'role/mod',
+    sticky: 'role/mod',
+    unsticky: 'role/mod',
+    search: true
+  },
+  NoteController: {
+    add: ['role/user', 'gems'],
+    view: true,
+    delete: ['role/user', 'gems'],
+    detail: 'role/user'
   },
   DebugController: {
     adminRole: 'role/admin',
     modRole: 'role/mod',
     userRole: 'role/user'
+  },
+  UserController: {
+    userPage: 'role/user',
+    adminPage: 'role/admin',
+    register: true
+  },
+  CategoryController: {
+    index: 'role/user',
+    edit: 'role/mod',
+    delete: 'role/mod',
+    add: 'role/mod'
+  },
+  AuthController: {
+    authenticate: true,
+    logout: true
   }
 
   /***************************************************************************

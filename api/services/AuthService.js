@@ -34,20 +34,6 @@ module.exports = {
       });
     })
   },
-  // checkRole: function (options) {
-  //   return new Promise((resolve, reject) => {
-  //     if (options.req.session.role === options.role) {
-  //       resolve({
-  //         success: true
-  //       });
-  //     } else {
-  //       reject({
-  //         success: false,
-  //         message: "No permission!"
-  //       });
-  //     }
-  //   });
-  // },
   checkPasswordOfUser: function (options) {
     const username = options.username;
     const password = options.password;

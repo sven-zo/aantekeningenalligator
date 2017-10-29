@@ -7,6 +7,7 @@ block content
   h1.display-4.aa-title= __('courseEdit.title')
   h2= __('courseAdd.categorySelect')
   form(method='post')
+    input(type='hidden' name='_csrf' value=_csrf)
     .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.getmdl-select.getmdl-select__fullwidth
       input#categories.mdl-textfield__input(name='category', type='text', value=categories[0].name, tabindex='-1')
       label.mdl-textfield__label(for='categories') Category

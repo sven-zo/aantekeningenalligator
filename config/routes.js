@@ -35,9 +35,10 @@ module.exports.routes = {
   '/course/delete/:code': 'Course.delete',
   // CATEGORIES
   '/categories': 'Category.index',
-  'get /category/edit/:category': 'Category.edit',
+  '/category/edit/:category': 'Category.edit',
   '/category/add': 'Category.add',
   '/category/delete/:category': 'Category.delete',
+  '/category/add': 'Category.add',
   // SIGNUP
   'get /signup': {
     view: 'auth/register'
@@ -52,7 +53,8 @@ module.exports.routes = {
   '/course/:code/note/add': 'Note.add',
   '/course/:code/note/:note/file/:file': 'Note.view',
   '/course/:code/note/:note/delete': 'Note.delete',
-  '/course/:code/note/:note/edit': 'Note.edit',
+  //'/course/:code/note/:note/edit': 'Note.edit',
+  '/course/:code/note/:note': 'Note.detail',
   // DEBUG
   '/debug/login': 'Debug.login',
   '/debug/token': 'Debug.token',
@@ -63,9 +65,16 @@ module.exports.routes = {
   // LOGOUT
   '/logout': 'Auth.logout',
   // USER MOD OR ADMIN ACTIONS
-  '/user/:user/setrole/:role': 'User.setRole',
-  '/user/:user/delete': 'User.delete',
-  '/user/:user/edit': 'User.edit',
+  //'/user/:user/setrole/:role': 'User.setRole',
+  //'/user/:user/delete': 'User.delete',
+  //'/user/:user/edit': 'User.edit',
   // USER GENERAL
   '/user': 'User.userPage',
+  // USER ADMIN
+  '/admin': 'User.adminPage',
+  // MAKE COURSES (UN)STICKY
+  '/course/:code/sticky': 'Course.sticky',
+  '/course/:code/unsticky': 'Course.unsticky',
+  // SEARCH
+  '/search': 'Course.search'
 };

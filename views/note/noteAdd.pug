@@ -6,7 +6,9 @@ block vars
 block content
   h1.display-4.aa-title= __('noteAdd.title')
   form(method='post', enctype="multipart/form-data")
+    input(type='hidden' name='_csrf' value=_csrf)
     .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.getmdl-select.getmdl-select__fullwidth
     +textfield('name', 'name')
+    +textfield('description', 'description')
     input(type='file', name='note')
     +submit('Add note')

@@ -12,28 +12,37 @@ module.exports = {
       type: 'string',
       required: true,
       size: 50,
+      unique: true
     },
     code: {
       type: 'string',
       required: true,
       size: 25,
+      unique: true
     },
     category: {
-      model: 'category'
+      model: 'category',
+      required: true
     },
     notes: {
       collection: 'note',
       via: 'course',
     },
     period: {
-      type: 'int',
+      type: 'integer',
       required: true,
       size: 1,
     },
     year: {
-      type: 'int',
+      type: 'integer',
       required: true,
       size: 4,
+      minLength: 4,
+      min: 2010
+    },
+    sticky: {
+      type: 'boolean',
+      default: false
     }
   },
 };

@@ -2,16 +2,16 @@ extends ../layout
 include ../mixins/card
 
 block vars
-  - var title='📓🐊 - Edit category'
+  - var title='📓🐊 - Add category'
 
 block content
-  h1.display-4.aa-title= __('categoryEdit.title')
+  h1.display-4.aa-title= __('categoryAdd.title')
   if validationMsg
     p= validationMsg
   form(method='post')
     input(type='hidden' name='_csrf' value=_csrf)
-    +textfield('name', 'name', category.name)
-    select(name='image', value=category.image)
+    +textfield('name', 'name')
+    select(name='image')
       option code
       option filo
       option ontwerp

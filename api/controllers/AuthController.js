@@ -26,6 +26,17 @@ module.exports = {
       req.session.role = user.role;
       sails.log('Role set: \n role = %s', req.session.role);
       // Send to succes page
+      // and add a gem for logging in :)
+      // if it's an admin or mod, give them 99 gems so they can bypass everything
+      if (user.role === 'user') {
+        await User.update({name: username}, {
+          gems: user.gems + 1
+        });
+      } else if (user.role === 'admin' || user.role === 'mod') {
+        await User.update({name: username}, {
+          gems: 99
+        });
+      }
       return res.view('auth/loginSucces', {redirect: req.session.redirect});
     } catch (err) {
       sails.log.error(new Error(err));
@@ -41,7 +52,6 @@ module.exports = {
     res.cookie('AantekeningenAlligator_e4RYHTNIe3wG5PohI7xq', '', {httpOnly: true});
     // Remove authenticated status
     req.session.authenticated = false;
-    // TODO: show pretty page
     return res.send('You are logged out');
   }
 };

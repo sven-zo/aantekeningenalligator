@@ -55,14 +55,31 @@ module.exports.http = {
   *                                                                           *
   ****************************************************************************/
 
-    // Maak hier een service van
-    syncHeader: function(req, res, next) {
+    syncHeader: async function(req, res, next) {
       if (req.cookies.AantekeningenAlligator_e4RYHTNIe3wG5PohI7xq) {
         req.session.username = jwt.decode(
           req.cookies.AantekeningenAlligator_e4RYHTNIe3wG5PohI7xq
         ).user;
+        try {
+          const user = await User.findOne({name: req.session.username});
+          if (user) {
+            req.session.displayName = user.displayName;
+            req.session.gems = user.gems;
+            sails.log(`ROLE: ${user.role}`)
+            req.session.role = user.role;
+            if (user.role === 'admin' || user.role === 'mod') {
+              req.session.modOrHigher = true;
+            }
+          }
+
+        } catch (err) {
+          req.session.displayName = req.session.username;
+          req.session.gems = false;
+        }
       } else {
         req.session.username = false;
+        req.session.displayName = false;
+        req.session.modOrHigher = false;
       }
       return next();
     }

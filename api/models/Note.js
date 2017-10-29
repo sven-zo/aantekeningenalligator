@@ -12,6 +12,7 @@ module.exports = {
       type: 'string',
       required: true,
       size: 50,
+      unique: true
     },
     course: {
       model: 'course'
@@ -27,7 +28,10 @@ module.exports = {
     },
     description: {
       type: 'string'
-    }
+    },
+    owner: {
+      model: 'user'
+    },
   }
 };
 

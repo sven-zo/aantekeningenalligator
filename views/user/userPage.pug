@@ -1,0 +1,13 @@
+extends ../layout
+
+block vars
+  - var title='📓🐊 - User'
+
+block content
+  h1 User page
+  if validation
+    p= validation
+  p Zet je display name (niet zelfde als login name)
+  form(method='post')
+    +textfield('displayName', 'displayName', user.displayName)
+    +submit('Save')

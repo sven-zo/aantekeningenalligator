@@ -6,6 +6,8 @@ block vars
 
 block content
   h1.display-4.aa-title= __('categoryList.title')
+  a(href='/category/add') Add a category
   .aa-course-list-cards
     each category in categories
-      +card(__('categoryList.cardAction.gotoDetail'))(href='/categories/edit',title=category.name, text=category.code, class=category.image)
+      +card(__('categoryList.cardAction.gotoDetail'))(href=`category/edit/${category.name}`,title=category.name, text=category.code, class=category.image)
+      a(href=`/category/delete/${category.name}`) Delete category

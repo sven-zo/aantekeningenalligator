@@ -4,7 +4,10 @@ block vars
   - var title='📓🐊 - Course'
 
 block content
-  a(href=editUrl) Edit
+  br
+  a(href=editUrl) Edit this course
+  br
+  a(href=deleteUrl) Delete this course
   h1.display-4.aa-title= course.name
   a(href=addUrl) Add a note
   table.mdl-data-table.mdl-js-data-table
@@ -12,11 +15,13 @@ block content
       tr
         th.mdl-data-table__cell--non-numeric Name
         th --------------
-        th Description
+        th Read description
     tbody
       each note in course.notes
         tr
           td.mdl-data-table__cell--non-numeric= note.name
           td
             a(href=note.fileUrl) Download
-          td.mdl-data-tabke__cell--non-numeric= note.description
+          td
+            a(href=`/course/${course.code}/note/${note.name}`) Details
+          //- td.mdl-data-tabke__cell--non-numeric= note.displayName

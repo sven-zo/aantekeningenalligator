@@ -12,35 +12,44 @@ module.exports = {
 	attributes: {
     name: {
       type: 'string',
-      required: true
+      required: true,
+      unique: true
     },
     password: {
       type: 'string',
       required: true
     },
     role: {
-      type: 'string',
-      default: 'user'
+      type: 'string'
     },
     displayName: {
       type: 'string',
-      required: true
+      required: true,
+      unique: true
+    },
+    gems: {
+      type: 'integer'
     }
   },
-
-  register: (name, password) => {
-    return new Promise((resolve, reject) => {
-      bcrypt.hash(password, 15, (err, hash) => {
-        if (err) reject (Error(err));
-        User.create({
-          name: name,
-          password: hash
-        }).exec((err, user) => {
-          if (err) reject (Error(err));
-          resolve();
-        })
-      })
-    })
+  register: (name, password, displayName) => {
+    return new Promise( async (resolve, reject) => {
+      try {
+        sails.log('Hashing...');
+        const hash = await bcrypt.hash(password, 15);
+        sails.log('Done! Creating user...');
+        await User.create({
+          name,
+          password: hash,
+          displayName,
+          gems: 0,
+          role: 'user'
+        });
+        sails.log('Done!');
+        resolve(true);
+      } catch (err) {
+        reject(err);
+      }
+    });
   }
 };
 

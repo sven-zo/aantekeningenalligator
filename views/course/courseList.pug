@@ -7,29 +7,76 @@ block content
   if snackbar
     +info(__('courseAdd.snackbarMessage'), 'undo', 'undo')
   h1.display-4.aa-title= __('courseList.title')
-  .mdl-card.mdl-shadow--4dp
-    .mdl-textfield.mdl-js-textfield.mdl-textfield--expandable
-      .aa-search-bar
-        .mdl-card__supporting-text
-          .aa-search
-            label.mdl-button.mdl-js-button.mdl-button--icon(for='course-search')
-              i.material-icons search
-            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-              input#course-search.mdl-textfield__input(type='text')
-              label.mdl-textfield__label(for='course-search') Search
-        .mdl-card__supporting-text
-          .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.getmdl-select.getmdl-select__fix-height
-            input#year.mdl-textfield__input(type='text', value='valueyear', readonly, tabindex='-1')
-            label(for='year')
-              i.mdl-icon-toggle__label.material-icons keyboard_arrow_down
-            label.mdl-textfield__label(for='year') Year
-            ul.mdl-menu.mdl-menu--bottom-left.mdl-js-menu(for='year')
-              li.mdl-menu__item(data-val='1') One
-              li.mdl-menu__item(data-val='2') Two
-              li.mdl-menu__item(data-val='3') Three
-        form.aa-formlink(action='course/add')
+  form.aa-formlink(action='course/add')
           button(type='submit').mdl-button.mdl-js-button.mdl-button--fab.mdl-js-ripple-effect.mdl-button--colored
             i.material-icons add
-  .aa-course-list-cards
+  //- .aa-search-card.mdl-card.mdl-shadow--4dp
+  //-   .mdl-textfield.mdl-js-textfield.mdl-textfield--expandable
+  //-     form.aa-search-bar(action='search', method='get')
+  //-       .mdl-card__supporting-text
+  //-         .aa-search
+  //-           label.mdl-button.mdl-js-button.mdl-button--icon(for='course-search')
+  //-             i.material-icons search
+  //-           .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+  //-             input#course-search.mdl-textfield__input(type='text')
+  //-             label.mdl-textfield__label(for='course-search') Search
+  //-       .mdl-card__supporting-text
+  //-         .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.getmdl-select.getmdl-select__fix-height
+  //-           input#year.mdl-textfield__input(type='text', value='valueyear', readonly, tabindex='-1')
+  //-           label(for='year')
+  //-             i.mdl-icon-toggle__label.material-icons keyboard_arrow_down
+  //-           label.mdl-textfield__label(for='year') Year
+  //-           ul.mdl-menu.mdl-menu--bottom-left.mdl-js-menu(for='year')
+  //-             li.mdl-menu__item(data-val='1') One
+  //-             li.mdl-menu__item(data-val='2') Two
+  //-             li.mdl-menu__item(data-val='3') Three
+  //-         button(type='submit').mdl-button.mdl-js-button.mdl-button--fab.mdl-js-ripple-effect.mdl-button--colored
+  //-           i.material-icons search
+  form(action='search', method='get')
+    input(type='hidden' name='_csrf' value=_csrf)
+    +textfield('query', 'query')
+    select(name='year')
+      option all
+      each year in years
+        option= year
+    select(name='period')
+      option all
+      each period in periods
+        option= period
+    //- .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.getmdl-select.getmdl-select__fix-height
+    //-   input#year.mdl-textfield__input(type='text', value='valueyear', readonly, tabindex='-1')
+    //-   label.mdl-textfield__label(for='year') Year
+    //-   ul.mdl-menu.mdl-menu--bottom-left.mdl-js-menu(for='year')
+    //-     each year in years
+    //-       li.mdl-menu__item(data-val=year)= year
+      //- label.mdl-textfield__label(for='period') Period
+      //- ul.mdl-menu.mdl-menu--bottom-left.mdl-js-menu(for='period')
+      //-   each period in periods
+      //-     li.mdl-menu__item(data-val=period)= period
+    +submit('Search')
+  if search
+    h2 Search results
+    .aa-course-list-cards
     each course in courses
-      +card(__('courseList.cardAction.gotoDetail'))(href=`/course/${course.code}`,title=course.name, text=course.code, class=course.category.image)
+        if printToggle
+          if course.sticky
+            +stickyCard(__('courseList.cardAction.gotoDetail'))(hrefStick=`/course/${course.code}/unsticky`, href=`/course/${course.code}`,title=course.name, text=`${course.code} / ${course.year} / ${course.period}`, class=course.category.image)
+          else
+            +unstickyCard(__('courseList.cardAction.gotoDetail'))(hrefStick=`/course/${course.code}/sticky`, href=`/course/${course.code}`,title=course.name, text=`${course.code} / ${course.year} / ${course.period}`, class=course.category.image)
+        else
+          +card(__('courseList.cardAction.gotoDetail'))(href=`/course/${course.code}`,title=course.name, text=`${course.code} / ${course.year} / ${course.period}`, class=course.category.image)
+  else
+    h2 Stickied courses
+    .aa-course-list-cards
+      each course in stickyCourses
+        +card(__('courseList.cardAction.gotoDetail'))(href=`/course/${course.code}`,title=course.name, text=`${course.code} / ${course.year} / ${course.period}`, class=course.category.image)
+    h2 All courses
+    .aa-course-list-cards
+      each course in courses
+        if printToggle
+          if course.sticky
+            +stickyCard(__('courseList.cardAction.gotoDetail'))(hrefStick=`/course/${course.code}/unsticky`, href=`/course/${course.code}`,title=course.name, text=`${course.code} / ${course.year} / ${course.period}`, class=course.category.image)
+          else
+            +unstickyCard(__('courseList.cardAction.gotoDetail'))(hrefStick=`/course/${course.code}/sticky`, href=`/course/${course.code}`,title=course.name, text=`${course.code} / ${course.year} / ${course.period}`, class=course.category.image)
+        else
+          +card(__('courseList.cardAction.gotoDetail'))(href=`/course/${course.code}`,title=course.name, text=`${course.code} / ${course.year} / ${course.period}`, class=course.category.image)

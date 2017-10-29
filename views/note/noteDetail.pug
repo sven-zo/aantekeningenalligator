@@ -1,0 +1,14 @@
+extends ../layout
+
+block vars
+  - var title='📓🐊 - Add Note'
+
+block content
+  h1.display-4.aa-title Note detail
+  h2 Description
+  p= note.description
+  h3 Owner
+  p= `Owner of this note is: ${note.owner.displayName}`
+  a(href=`/course/${req.params.code}/note/${req.params.note}/delete`) Delete this note
+  //- br
+  //- a(href=`/course/${req.params.code}/note/${req.params.note}/move`) Move this note

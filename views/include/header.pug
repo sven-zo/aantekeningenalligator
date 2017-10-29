@@ -7,10 +7,12 @@
       nav.mdl-navigation.mdl-layout--large-screen-only
         a.mdl-navigation__link(href='/')= __('menu.home')
         a.mdl-navigation__link(href=sails.getUrlFor('Course.index'))= __('menu.courses')
-        a.mdl-navigation__link(href=sails.getUrlFor('Category.index'))= __('menu.categories')
         if req.session.username
-          a.mdl-navigation__link(href='#') 💎0
-          a.mdl-navigation__link(href='/user')= req.session.username
+          if req.session.modOrHigher
+            a.mdl-navigation__link(href=sails.getUrlFor('Category.index'))= __('menu.categories')
+          if req.session.gems
+            a.mdl-navigation__link(href='#')= `💎${req.session.gems}`
+          a.mdl-navigation__link(href='/user')= req.session.displayName
           a.mdl-navigation__link(href='/logout') Log out
         else
           a.mdl-navigation__link(href='/login') Log in
@@ -19,8 +21,6 @@
     nav.mdl-navigation
       a.mdl-navigation__link(href='/')= __('menu.home')
       a.mdl-navigation__link(href=sails.getUrlFor('Course.index'))= __('menu.courses')
-      a.mdl-navigation__link(href=sails.getUrlFor('Category.index'))= __('menu.categories')
-      a.mdl-navigation__link(href='') Link
   main.mdl-layout__content.aa-dynamic
     .page-content.aa-bg
       block content

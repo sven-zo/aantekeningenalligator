@@ -11,7 +11,8 @@ module.exports = {
     name: {
       type: 'String',
       required: true,
-      size: 50
+      size: 50,
+      unique: true
     },
     image: {
       type: 'string',
